@@ -47,4 +47,49 @@ it("renders without crashing", function(){
     photos = {TEST_IMAGES}
     title = "images for testing"
     />);
-})
+});
+
+it("works when you click left arrow", function(){
+  const { container } = render(
+    <Carousel
+      photos={TEST_IMAGES}
+      title="images for testing"
+    />);
+
+    const rightArrow = container.querySelector(".bi-arrow-right-circle");
+    fireEvent.click(rightArrow);
+
+    const leftArrow = container.querySelector(".bi-arrow-left-circle");
+    fireEvent.click(leftArrow);
+    
+    expect(
+      container.querySelector('img[alt="testing image 1"]')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('img[alt="testing image 2"]')
+    ).not.toBeInTheDocument();
+
+});
+
+it("hides left arrow when on first image and right when on last image", function(){
+  const { container } = render(
+    <Carousel
+      photos={TEST_IMAGES}
+      title="images for testing"
+    />);
+
+    const leftArrow = container.querySelector(".bi-arrow-left-circle");
+    const rightArrow = container.querySelector(".bi-arrow-right-circle");
+
+    expect(leftArrow).toHaveClass("hidden");
+    expect(rightArrow).not.toHaveClass("hidden");
+
+    fireEvent.click(rightArrow);
+    expect(leftArrow).not.toHaveClass("hidden");
+    expect(rightArrow).not.toHaveClass("hidden");
+
+    fireEvent.click(rightArrow);
+    expect(leftArrow).not.toHaveClass("hidden");
+    expect(rightArrow).toHaveClass("hidden");
+
+});
