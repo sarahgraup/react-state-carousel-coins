@@ -4,14 +4,14 @@ import Card from "./Card";
 
 
 /** Carousel: displays images and arrows to navigate through them
- * 
+ *
  * Props:
  * - photos: array of {src, caption} objects
  * - title: string describing the collection of images
- * 
+ *
  * State:
  * - currCardIdx: integer for current card index
- * 
+ *
  * App --> Carousel --> Card
  */
  function Carousel({ photos, title }) {
@@ -19,35 +19,33 @@ import Card from "./Card";
 
   const currCard = photos[currCardIdx];
   const total = photos.length;
+
+  // TODO: possible use of ternary operator lines 24-32
   let leftArrowHidden = "";
   let rightArrowHidden = "";
+
   if(currCardIdx === 0){
     leftArrowHidden = "hidden";
   }
+
   if(currCardIdx === total-1){
     rightArrowHidden = "hidden";
   }
-  
 
-  //Increments currCardIdx state by 1 
+
+  //Increments currCardIdx state by 1
   //if current index is not length of amount of images
   function goForward() {
-    // if(currCardIdx===total-1){
-    //   setCurrCardIdx(0);
-    // }else{
       setCurrCardIdx(currCardIdx + 1);
     // }
   }
 
-   //decrements currCardIdx state by 1 
+   //decrements currCardIdx state by 1
   //if current index is not 0
   function goBack() {
-    // if(currCardIdx===0){
-    //   setCurrCardIdx(total-1);
-    // }else{
       setCurrCardIdx(currCardIdx - 1);
     // }
-   
+
   }
 
   return (

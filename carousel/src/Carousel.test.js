@@ -59,9 +59,16 @@ it("works when you click left arrow", function(){
     const rightArrow = container.querySelector(".bi-arrow-right-circle");
     fireEvent.click(rightArrow);
 
+    expect(
+      container.querySelector('img[alt="testing image 1"]')
+    ).not.toBeInTheDocument();
+    expect(
+      container.querySelector('img[alt="testing image 2"]')
+    ).toBeInTheDocument();
+
     const leftArrow = container.querySelector(".bi-arrow-left-circle");
     fireEvent.click(leftArrow);
-    
+
     expect(
       container.querySelector('img[alt="testing image 1"]')
     ).toBeInTheDocument();
